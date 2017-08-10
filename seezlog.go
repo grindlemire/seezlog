@@ -239,19 +239,18 @@ func newTraceConsoleFilter(path string) (f filter) {
 }
 
 // SetupLogger will setup a seelog logger to a specific log level and will output to stdout
-// to a specific log level.
-func SetupLogger(logTo Level, outTo Level, path string) (err error) {
+// to a specific log level. Call ReplaceLogger with this logger from seelog to use this logger.
+func SetupLogger(logTo Level, outTo Level, path string) (logger log.LoggerInterface, err error) {
 	config, err := GenerateConfig(logTo, outTo, path)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	logger, err := log.LoggerFromConfigAsBytes([]byte(config))
+	logger, err = log.LoggerFromConfigAsBytes([]byte(config))
 	if err != nil {
-		return fmt.Errorf("error configuring logger from inline xml: %v", err)
+		return nil, fmt.Errorf("error configuring logger from inline xml: %v", err)
 	}
-	log.ReplaceLogger(logger)
-	return nil
+	return logger, nil
 }
 
 // GenerateConfig will generate the seelog xml file and spit it out to stdout.

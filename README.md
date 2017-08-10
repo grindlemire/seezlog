@@ -13,9 +13,9 @@ There are only two public functions to keep this simple to use:
 
 ### `SetupLogger`
 ```Go
-SetupLogger(logTo Level, outTo Level, path string) (err error)
+SetupLogger(logTo Level, outTo Level, path string) (logger log.LoggerInterface, err error)
 ```
-Creates and initializes up a seelog logger that will print to stdout up to `outTo` level and will print to a log file up to `logTo` level.
+Creates and initializes up a seelog logger that will print to stdout up to `outTo` level and will print to a log file up to `logTo` level. Just plug this into seelog's `ReplaceLogger` function to use it. See the example below or take a look in the [examples](https://github.com/Grindlemire/seezlog/tree/master/examples) directory
 
 ---
 ### `GenerateConfig`
@@ -32,11 +32,19 @@ The accepted log levels of type `Level` are
 
 ### Example
 ```Go
-err := seezlog.SetupLogger(seezlog.Critical, seezlog.Warn, "./example.log")
+
+import(
+    seezlog "github.com/grindlemire/seezlog"
+    log "github.com/cihub/seelog"
+)
+
+logger, err := seezlog.SetupLogger(seezlog.Critical, seezlog.Warn, "./example.log")
 if err != nil {
     fmt.Printf("Error setting up logger: %v", err)
     os.Exit(1)
 }
+log.ReplaceLogger(logger)
+defer log.Flush()
 
 log.Info("This info will print to stdout and the log file")
 log.Warn("This warn will print to stdout and the log file")

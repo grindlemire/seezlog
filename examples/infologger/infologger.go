@@ -9,11 +9,13 @@ import (
 )
 
 func main() {
-	err := seezlog.SetupLogger(seezlog.Critical, seezlog.Info, "./example.log")
+	logger, err := seezlog.SetupLogger(seezlog.Critical, seezlog.Info, "./example.log")
 	if err != nil {
 		fmt.Printf("Error setting up logger: %v", err)
 		os.Exit(1)
 	}
+	log.ReplaceLogger(logger)
+	defer log.Flush()
 
 	log.Info("Woo info logs go to stdout and the log file")
 	log.Warn("Warn logs only go to the file")
