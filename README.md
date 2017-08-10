@@ -26,7 +26,7 @@ Generates the configuration to create a seelog logger that will print to stdout 
 
 ### Log  Levels
 The accepted log levels of type `Level` are
-`Info`, `Warn`, `Error`, `Critical`, `Debug`, `Trace`, `NoLog`
+`Info`, `Warn`, `Error`, `Critical`, `Debug`, `Trace`, and `NoLog`
 
 ---
 
