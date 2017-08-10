@@ -5,7 +5,7 @@ Look at the [Godoc](http://godoc.org/github.com/grindlemire/seezlog) for full do
 
 
 # Why?
-Because I found myself wanting to use seelog as a logger for command line tools but found it tedious to set up the xml formatting in every project. This will wrap all that logic and provide you a one line function that can setup a seelogger that prints to both a log file and stdout with the same formatting
+Because I found myself wanting to use seelog as a logger for command line tools but found it tedious to set up the xml formatting in every project. This will wrap all that logic and provide you a one line function that initializes a seelog logger capable of printing both to stdout and a log file.
 
 
 # Usage
@@ -26,7 +26,7 @@ Generates the configuration to create a seelog logger that will print to stdout 
 
 ### Log  Levels
 The accepted log levels of type `Level` are
-`Info`, `Warn`, `Error`, `Critical`, `Debug`, and `Trace`
+`Info`, `Warn`, `Error`, `Critical`, `Debug`, `Trace`, `NoLog`
 
 ---
 
