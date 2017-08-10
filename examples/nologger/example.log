@@ -1,0 +1,6 @@
+[32m[Info][0m [2017-08-10 16:36:41] [nologger.go] All info logs should go to the file only
+[33m[WARN][0m [2017-08-10 16:36:41] [main @ nologger.go.21] All warn logs should go to the file only
+[31m[ERROR][0m [2017-08-10 16:36:41] [main @ nologger.go.22] All error logs should go to the file only
+[31m[CRITICAL][0m [2017-08-10 16:36:41] [main @ nologger.go.23] All critical logs should go to the file only
+[34m[DEBUG][0m [2017-08-10 16:36:41] [main @ nologger.go:24] All debug logs should go to the file only
+[36m[TRACE][0m [2017-08-10 16:36:41] [main @ nologger.go:25] All trace logs should go to the file only

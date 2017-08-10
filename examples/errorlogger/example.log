@@ -1,0 +1,4 @@
+[32m[Info][0m [2017-08-10 16:49:25] [errorlogger.go] Woo info logs go to stdout and the log file
+[33m[WARN][0m [2017-08-10 16:49:25] [main @ errorlogger.go.19] Woo warn logs go to stdout and the log file
+[31m[ERROR][0m [2017-08-10 16:49:25] [main @ errorlogger.go.20] Woo error logs go to stdout and the log file
+[31m[CRITICAL][0m [2017-08-10 16:49:25] [main @ errorlogger.go.21] Critical logs only go to the file

@@ -1,0 +1,13 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "GvGyaM5QbKiTgFHaFU91/xjD3X4=",
+			"path": "github.com/cihub/seelog",
+			"revision": "62b842b5264a13a6d5ea6ac4b4c00c75f984dd4c",
+			"revisionTime": "2016-05-24T19:38:31Z"
+		}
+	],
+	"rootPath": "github.com/grindlemire/SeeZLog"
+}
