@@ -9,7 +9,8 @@ import (
 
 // Level is the enum type representing the log level
 type Level int
-// Log levels
+
+// Log levels accepted by GenerateConfig and SetupLogger.
 const (
 	NoLog = iota
 	Info
@@ -21,7 +22,7 @@ const (
 )
 
 type withConsole int
-// With or without console
+
 const (
 	with = iota
 	without
@@ -237,7 +238,8 @@ func newTraceConsoleFilter(path string) (f filter) {
 	}
 }
 
-// SetupLogger will setup a logger to a specific log level and will output to stdout to a specific log level
+// SetupLogger will setup a seelog logger to a specific log level and will output to stdout
+// to a specific log level.
 func SetupLogger(logTo Level, outTo Level, path string) (err error) {
 	config, err := GenerateConfig(logTo, outTo, path)
 	if err != nil {
@@ -252,7 +254,7 @@ func SetupLogger(logTo Level, outTo Level, path string) (err error) {
 	return nil
 }
 
-// GenerateConfig will generate the seelog xml file and spit it out
+// GenerateConfig will generate the seelog xml file and spit it out to stdout.
 func GenerateConfig(logTo Level, outTo Level, path string) (config string, err error) {
 	seeLog := newCommonSeelog()
 	filters := []filter{}
