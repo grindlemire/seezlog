@@ -9,13 +9,20 @@ Because I found myself wanting to use seelog as a logger for command line tools 
 
 
 # Usage
-For simplicity, there are only two public functions:
+For simplicity, there are only three public functions:
 
 ### `SetupLogger`
 ```Go
 SetupLogger(logTo Level, outTo Level, path string) (logger log.LoggerInterface, err error)
 ```
 Creates and initializes up a seelog logger that will print to stdout up to `outTo` log level and will print to a log file up to `logTo` log level. Just plug this into seelog's `ReplaceLogger` function to use it. See the example below or take a look in the [examples](https://github.com/Grindlemire/seezlog/tree/master/examples) directory
+
+---
+### `SetupConsoleLogger`
+```Go
+SetupLogger(outTo Level) (logger log.LoggerInterface, err error)
+```
+Creates and initializes up a seelog logger that will only print to stdout up to `outTo` log level. Just plug this into seelog's `ReplaceLogger` function to use it. See the example below or take a look in the [examples](https://github.com/Grindlemire/seezlog/tree/master/examples) directory
 
 ---
 ### `GenerateConfig`
