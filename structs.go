@@ -17,9 +17,8 @@ type format struct {
 }
 
 type filter struct {
-	Levels   string `xml:"levels,attr"`
-	FormatID string `xml:"formatid,attr"`
-	// Note the console type is a slight hack to get it to ommit properly when empty. This will insert a true that does nothing in the xml struct
+	Levels      string       `xml:"levels,attr"`
+	FormatID    string       `xml:"formatid,attr"`
 	Console     *console     `xml:"console,omitempty"`
 	RollingFile *rollingFile `xml:"rollingfile,omitempty"`
 }
