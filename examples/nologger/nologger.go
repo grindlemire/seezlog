@@ -10,7 +10,7 @@ import (
 
 func main() {
 
-	err := seezlog.SetupLogger(seezlog.Trace, seezlog.NoLog, "./example.log")
+	logger, err := seezlog.SetupLogger(seezlog.Trace, seezlog.NoLog, "./example.log")
 	if err != nil {
 		fmt.Printf("Error setting up logger: %v", err)
 		os.Exit(1)

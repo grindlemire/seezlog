@@ -1,6 +1,6 @@
-[32m[Info][0m [2017-08-10 16:32:59] [tracelogger.go] Woo info logs go to stdout and the log file
-[33m[WARN][0m [2017-08-10 16:32:59] [main @ tracelogger.go.21] Woo warn logs go to stdout and the log file
-[31m[ERROR][0m [2017-08-10 16:32:59] [main @ tracelogger.go.22] Woo error logs go to stdout and the log file
-[31m[CRITICAL][0m [2017-08-10 16:32:59] [main @ tracelogger.go.23] Woo critical logs go to stdout and the log file
-[34m[DEBUG][0m [2017-08-10 16:32:59] [main @ tracelogger.go:24] Woo debug logs go to stdout and the log file
-[36m[TRACE][0m [2017-08-10 16:32:59] [main @ tracelogger.go:25] Woo trace logs go to stdout and the log file
+[32m[Info][0m [2017-08-31 19:17:41] [tracelogger.go] Woo info logs go to stdout and the log file
+[33m[WARN][0m [2017-08-31 19:17:41] [main @ tracelogger.go.22] Woo warn logs go to stdout and the log file
+[31m[ERROR][0m [2017-08-31 19:17:41] [main @ tracelogger.go.23] Woo error logs go to stdout and the log file
+[31m[CRITICAL][0m [2017-08-31 19:17:41] [main @ tracelogger.go.24] Woo critical logs go to stdout and the log file
+[34m[DEBUG][0m [2017-08-31 19:17:41] [main @ tracelogger.go:25] Woo debug logs go to stdout and the log file
+[36m[TRACE][0m [2017-08-31 19:17:41] [main @ tracelogger.go:26] Woo trace logs go to stdout and the log file

@@ -20,15 +20,17 @@ type filter struct {
 	Levels   string `xml:"levels,attr"`
 	FormatID string `xml:"formatid,attr"`
 	// Note the console type is a slight hack to get it to ommit properly when empty. This will insert a true that does nothing in the xml struct
-	Console     bool        `xml:"console,omitempty"`
-	RollingFile rollingFile `xml:"rollingfile"`
+	Console     *console     `xml:"console,omitempty"`
+	RollingFile *rollingFile `xml:"rollingfile,omitempty"`
 }
 
+type console struct{}
+
 type rollingFile struct {
-	Type     string `xml:"type,attr"`
-	FileName string `xml:"filename,attr"`
-	MaxSize  int    `xml:"maxsize,attr"`
-	MaxRolls int    `xml:"maxrolls,attr"`
+	Type     string `xml:"type,attr,omitempty"`
+	FileName string `xml:"filename,attr,omitempty"`
+	MaxSize  int    `xml:"maxsize,attr,omitempty"`
+	MaxRolls int    `xml:"maxrolls,attr,omitempty"`
 }
 
 // Format strings that define the way the log is printed to the log

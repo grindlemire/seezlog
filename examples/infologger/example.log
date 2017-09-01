@@ -1,4 +1,4 @@
-[32m[Info][0m [2017-08-10 16:37:07] [infologger.go] Woo info logs go to stdout and the log file
-[33m[WARN][0m [2017-08-10 16:37:07] [main @ infologger.go.19] Warn logs only go to the file
-[31m[ERROR][0m [2017-08-10 16:37:07] [main @ infologger.go.20] Error logs only go to the file
-[31m[CRITICAL][0m [2017-08-10 16:37:07] [main @ infologger.go.21] Critical logs only go to the file
+[32m[Info][0m [2017-08-31 19:17:07] [infologger.go] Woo info logs go to stdout and the log file
+[33m[WARN][0m [2017-08-31 19:17:07] [main @ infologger.go.21] Warn logs only go to the file
+[31m[ERROR][0m [2017-08-31 19:17:07] [main @ infologger.go.22] Error logs only go to the file
+[31m[CRITICAL][0m [2017-08-31 19:17:07] [main @ infologger.go.23] Critical logs only go to the file

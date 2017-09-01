@@ -21,15 +21,16 @@ const (
 	Trace
 )
 
-type withConsole int
+type hasConsole int
 
 const (
-	with = iota
-	without
+	withConsole = iota
+	withoutConsole
+	onlyConsole
 )
 
 type filterCtor func(path string) filter
-type consoleToFilter map[withConsole]filterCtor
+type consoleToFilter map[hasConsole]filterCtor
 
 var orderedLogList = []Level{
 	Info,
@@ -42,28 +43,34 @@ var orderedLogList = []Level{
 
 var levelToFilter = map[Level]consoleToFilter{
 	Info: consoleToFilter{
-		with:    newInfoConsoleFilter,
-		without: newInfoFilter,
+		withConsole:    newInfoConsoleFilter,
+		withoutConsole: newInfoFilter,
+		onlyConsole:    newInfoConsoleOnlyFilter,
 	},
 	Warn: consoleToFilter{
-		with:    newWarnConsoleFilter,
-		without: newWarnFilter,
+		withConsole:    newWarnConsoleFilter,
+		withoutConsole: newWarnFilter,
+		onlyConsole:    newWarnConsoleOnlyFilter,
 	},
 	Error: consoleToFilter{
-		with:    newErrorConsoleFilter,
-		without: newErrorFilter,
+		withConsole:    newErrorConsoleFilter,
+		withoutConsole: newErrorFilter,
+		onlyConsole:    newErrorConsoleOnlyFilter,
 	},
 	Critical: consoleToFilter{
-		with:    newCriticalConsoleFilter,
-		without: newCriticalFilter,
+		withConsole:    newCriticalConsoleFilter,
+		withoutConsole: newCriticalFilter,
+		onlyConsole:    newCriticalConsoleOnlyFilter,
 	},
 	Debug: consoleToFilter{
-		with:    newDebugConsoleFilter,
-		without: newDebugFilter,
+		withConsole:    newDebugConsoleFilter,
+		withoutConsole: newDebugFilter,
+		onlyConsole:    newDebugConsoleOnlyFilter,
 	},
 	Trace: consoleToFilter{
-		with:    newTraceConsoleFilter,
-		without: newTraceFilter,
+		withConsole:    newTraceConsoleFilter,
+		withoutConsole: newTraceFilter,
+		onlyConsole:    newTraceConsoleOnlyFilter,
 	},
 }
 
@@ -80,7 +87,7 @@ func newInfoFilter(path string) filter {
 	return filter{
 		Levels:   infoLevel,
 		FormatID: infoFormatID,
-		RollingFile: rollingFile{
+		RollingFile: &rollingFile{
 			Type:     "size",
 			FileName: path,
 			MaxSize:  20000000,
@@ -93,13 +100,21 @@ func newInfoConsoleFilter(path string) (f filter) {
 	return filter{
 		Levels:   infoLevel,
 		FormatID: infoFormatID,
-		RollingFile: rollingFile{
+		RollingFile: &rollingFile{
 			Type:     "size",
 			FileName: path,
 			MaxSize:  20000000,
 			MaxRolls: 5,
 		},
-		Console: true,
+		Console: &console{},
+	}
+}
+
+func newInfoConsoleOnlyFilter(path string) (f filter) {
+	return filter{
+		Levels:   infoLevel,
+		FormatID: infoFormatID,
+		Console:  &console{},
 	}
 }
 
@@ -107,7 +122,7 @@ func newWarnFilter(path string) filter {
 	return filter{
 		Levels:   warnLevel,
 		FormatID: warnFormatID,
-		RollingFile: rollingFile{
+		RollingFile: &rollingFile{
 			Type:     "size",
 			FileName: path,
 			MaxSize:  20000000,
@@ -120,13 +135,21 @@ func newWarnConsoleFilter(path string) (f filter) {
 	return filter{
 		Levels:   warnLevel,
 		FormatID: warnFormatID,
-		RollingFile: rollingFile{
+		RollingFile: &rollingFile{
 			Type:     "size",
 			FileName: path,
 			MaxSize:  20000000,
 			MaxRolls: 5,
 		},
-		Console: true,
+		Console: &console{},
+	}
+}
+
+func newWarnConsoleOnlyFilter(path string) (f filter) {
+	return filter{
+		Levels:   warnLevel,
+		FormatID: warnFormatID,
+		Console:  &console{},
 	}
 }
 
@@ -134,7 +157,7 @@ func newErrorFilter(path string) filter {
 	return filter{
 		Levels:   errorLevel,
 		FormatID: errorFormatID,
-		RollingFile: rollingFile{
+		RollingFile: &rollingFile{
 			Type:     "size",
 			FileName: path,
 			MaxSize:  20000000,
@@ -147,13 +170,21 @@ func newErrorConsoleFilter(path string) (f filter) {
 	return filter{
 		Levels:   errorLevel,
 		FormatID: errorFormatID,
-		RollingFile: rollingFile{
+		RollingFile: &rollingFile{
 			Type:     "size",
 			FileName: path,
 			MaxSize:  20000000,
 			MaxRolls: 5,
 		},
-		Console: true,
+		Console: &console{},
+	}
+}
+
+func newErrorConsoleOnlyFilter(path string) (f filter) {
+	return filter{
+		Levels:   errorLevel,
+		FormatID: errorFormatID,
+		Console:  &console{},
 	}
 }
 
@@ -161,7 +192,7 @@ func newCriticalFilter(path string) filter {
 	return filter{
 		Levels:   criticalLevel,
 		FormatID: criticalFormatID,
-		RollingFile: rollingFile{
+		RollingFile: &rollingFile{
 			Type:     "size",
 			FileName: path,
 			MaxSize:  20000000,
@@ -174,13 +205,21 @@ func newCriticalConsoleFilter(path string) (f filter) {
 	return filter{
 		Levels:   criticalLevel,
 		FormatID: criticalFormatID,
-		RollingFile: rollingFile{
+		RollingFile: &rollingFile{
 			Type:     "size",
 			FileName: path,
 			MaxSize:  20000000,
 			MaxRolls: 5,
 		},
-		Console: true,
+		Console: &console{},
+	}
+}
+
+func newCriticalConsoleOnlyFilter(path string) (f filter) {
+	return filter{
+		Levels:   criticalLevel,
+		FormatID: criticalFormatID,
+		Console:  &console{},
 	}
 }
 
@@ -188,7 +227,7 @@ func newDebugFilter(path string) filter {
 	return filter{
 		Levels:   debugLevel,
 		FormatID: debugFormatID,
-		RollingFile: rollingFile{
+		RollingFile: &rollingFile{
 			Type:     "size",
 			FileName: path,
 			MaxSize:  20000000,
@@ -201,13 +240,21 @@ func newDebugConsoleFilter(path string) (f filter) {
 	return filter{
 		Levels:   debugLevel,
 		FormatID: debugFormatID,
-		RollingFile: rollingFile{
+		RollingFile: &rollingFile{
 			Type:     "size",
 			FileName: path,
 			MaxSize:  20000000,
 			MaxRolls: 5,
 		},
-		Console: true,
+		Console: &console{},
+	}
+}
+
+func newDebugConsoleOnlyFilter(path string) (f filter) {
+	return filter{
+		Levels:   debugLevel,
+		FormatID: debugFormatID,
+		Console:  &console{},
 	}
 }
 
@@ -215,7 +262,7 @@ func newTraceFilter(path string) filter {
 	return filter{
 		Levels:   traceLevel,
 		FormatID: traceFormatID,
-		RollingFile: rollingFile{
+		RollingFile: &rollingFile{
 			Type:     "size",
 			FileName: path,
 			MaxSize:  20000000,
@@ -228,13 +275,21 @@ func newTraceConsoleFilter(path string) (f filter) {
 	return filter{
 		Levels:   traceLevel,
 		FormatID: traceFormatID,
-		RollingFile: rollingFile{
+		RollingFile: &rollingFile{
 			Type:     "size",
 			FileName: path,
 			MaxSize:  20000000,
 			MaxRolls: 5,
 		},
-		Console: true,
+		Console: &console{},
+	}
+}
+
+func newTraceConsoleOnlyFilter(path string) (f filter) {
+	return filter{
+		Levels:   traceLevel,
+		FormatID: traceFormatID,
+		Console:  &console{},
 	}
 }
 
@@ -253,22 +308,34 @@ func SetupLogger(logTo Level, outTo Level, path string) (logger log.LoggerInterf
 	return logger, nil
 }
 
+// SetupLogger will setup a seelog logger that only outputs to stdout
+// to a specific log level. Call ReplaceLogger with this logger from seelog to use this logger.
+func SetupConsoleLogger(outTo Level) (logger log.LoggerInterface, err error) {
+	config, err := GenerateConfig(NoLog, outTo, "")
+	if err != nil {
+		return nil, err
+	}
+
+	logger, err = log.LoggerFromConfigAsBytes([]byte(config))
+	if err != nil {
+		return nil, fmt.Errorf("error configuring logger from inline xml: %v", err)
+	}
+	return logger, nil
+}
+
 // GenerateConfig will generate the seelog xml file and spit it out to stdout.
 func GenerateConfig(logTo Level, outTo Level, path string) (config string, err error) {
 	seeLog := newCommonSeelog()
 	filters := []filter{}
-	for _, level := range orderedLogList {
-		var filter filter
-		if outTo != NoLog && level <= outTo {
-			filterCtor := levelToFilter[level][with]
-			filter = filterCtor(path)
-			filters = append(filters, filter)
-		} else if logTo != NoLog && level <= logTo {
-			filterCtor := levelToFilter[level][without]
-			filter = filterCtor(path)
-			filters = append(filters, filter)
-		}
+
+	if logTo == NoLog {
+		filters = onlyConsoleConfig(outTo)
+	} else if outTo == NoLog {
+		filters = onlyLogConfig(logTo, path)
+	} else {
+		filters = bothConfig(logTo, outTo, path)
 	}
+
 	seeLog.Outputs.Filters = filters
 
 	sConf, err := xml.Marshal(seeLog)
@@ -277,4 +344,47 @@ func GenerateConfig(logTo Level, outTo Level, path string) (config string, err e
 	}
 
 	return string(sConf), err
+}
+
+func onlyConsoleConfig(outTo Level) (filters []filter) {
+	for _, level := range orderedLogList {
+		var filter filter
+		if level <= outTo {
+			filterCtor := levelToFilter[level][onlyConsole]
+			filter = filterCtor("")
+			filters = append(filters, filter)
+		}
+	}
+
+	return filters
+}
+
+func onlyLogConfig(logTo Level, path string) (filters []filter) {
+	for _, level := range orderedLogList {
+		var filter filter
+		if level <= logTo {
+			filterCtor := levelToFilter[level][withoutConsole]
+			filter = filterCtor(path)
+			filters = append(filters, filter)
+		}
+	}
+
+	return filters
+}
+
+func bothConfig(logTo Level, outTo Level, path string) (filters []filter) {
+	for _, level := range orderedLogList {
+		var filter filter
+		if level <= outTo {
+			filterCtor := levelToFilter[level][withConsole]
+			filter = filterCtor(path)
+			filters = append(filters, filter)
+		} else if level <= logTo {
+			filterCtor := levelToFilter[level][withoutConsole]
+			filter = filterCtor(path)
+			filters = append(filters, filter)
+		}
+	}
+
+	return filters
 }
