@@ -1,7 +1,7 @@
 # seezlog
 seezlog is a convenience wrapper for [seelog](https://github.com/cihub/seelog) so you can setup formatted logging in one line and it will "just work".
 
-[Godoc](http://godoc.org/github.com/grindlemire/seezlog)
+[Godoc](http://godoc.org/github.com/Grindlemire/seezlog)
 
 
 # Why?
@@ -20,7 +20,7 @@ Creates and initializes up a seelog logger that will print to stdout up to `outT
 ---
 ### `SetupConsoleLogger`
 ```Go
-SetupLogger(outTo Level) (logger log.LoggerInterface, err error)
+SetupConsoleLogger(outTo Level) (logger log.LoggerInterface, err error)
 ```
 Creates and initializes up a seelog logger that will only print to stdout up to `outTo` log level. Just plug this into seelog's `ReplaceLogger` function to use it. See the example below or take a look in the [examples](https://github.com/Grindlemire/seezlog/tree/master/examples) directory
 
