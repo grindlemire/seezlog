@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	logger, err := seezlog.SetupConsoleLogger(seezlog.Error)
+	logger, err := seezlog.SetupConsoleLogger(seezlog.Debug)
 	if err != nil {
 		fmt.Printf("Error setting up logger: %v", err)
 		os.Exit(1)
@@ -17,10 +17,10 @@ func main() {
 	log.ReplaceLogger(logger)
 	defer log.Flush()
 
-	log.Info("Woo info logs only go to stdout")
-	log.Warn("Woo warn logs only go to stdout")
+	log.Critical("Woo critical logs only go to stdout")
 	log.Error("Woo error logs only go to stdout")
-	log.Critical("Critical logs are not logged")
+	log.Warn("Warn logs are not logged")
+	log.Info("Info logs are not logged")
 	log.Debug("Debug logs are not logged")
 	log.Trace("Trace logs are not logged")
 }

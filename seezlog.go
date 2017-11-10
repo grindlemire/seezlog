@@ -13,10 +13,10 @@ type Level int
 // Log levels accepted by GenerateConfig and SetupLogger.
 const (
 	NoLog = iota
-	Info
-	Warn
-	Error
 	Critical
+	Error
+	Warn
+	Info
 	Debug
 	Trace
 )
@@ -33,10 +33,10 @@ type filterCtor func(path string) filter
 type consoleToFilter map[hasConsole]filterCtor
 
 var orderedLogList = []Level{
-	Info,
-	Warn,
-	Error,
 	Critical,
+	Error,
+	Warn,
+	Info,
 	Debug,
 	Trace,
 }

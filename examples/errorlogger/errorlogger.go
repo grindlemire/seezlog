@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	logger, err := seezlog.SetupLogger(seezlog.Critical, seezlog.Error, "./example.log")
+	logger, err := seezlog.SetupLogger(seezlog.Error, seezlog.Critical, "./example.log")
 	if err != nil {
 		fmt.Printf("Error setting up logger: %v", err)
 		os.Exit(1)
@@ -17,10 +17,10 @@ func main() {
 	log.ReplaceLogger(logger)
 	defer log.Flush()
 
-	log.Info("Woo info logs go to stdout and the log file")
-	log.Warn("Woo warn logs go to stdout and the log file")
-	log.Error("Woo error logs go to stdout and the log file")
-	log.Critical("Critical logs only go to the file")
+	log.Critical("Woo critical logs go to stdout and the log file")
+	log.Error("Error logs go to just the log")
+	log.Warn("Warn logs go to just the log")
+	log.Info("Info logs go to just the log")
 	log.Debug("Debug logs are not logged")
 	log.Trace("Trace logs are not logged either")
 }

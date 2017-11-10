@@ -33,7 +33,9 @@ Generates the configuration to create a seelog logger that will print to stdout 
 
 ### Log  Levels
 The accepted log levels of type `Level` are
-`Info`, `Warn`, `Error`, `Critical`, `Debug`, `Trace`, and `NoLog`
+`Critical`, `Error`, `Warn`, `Info`, `Debug`, `Trace`, and `NoLog`
+
+The level ordering is as follows: `Critical` > `Error` > `Warn` > `Info` > `Debug` > `Trace`
 
 ---
 
@@ -45,7 +47,7 @@ import(
     log "github.com/cihub/seelog"
 )
 
-logger, err := seezlog.SetupLogger(seezlog.Critical, seezlog.Warn, "./example.log")
+logger, err := seezlog.SetupLogger(seezlog.Info, seezlog.Warn, "./example.log")
 if err != nil {
     fmt.Printf("Error setting up logger: %v", err)
     os.Exit(1)
@@ -53,10 +55,10 @@ if err != nil {
 log.ReplaceLogger(logger)
 defer log.Flush()
 
-log.Info("This info will print to stdout and the log file")
+log.Critical("This critical will to stdout and the log file")
 log.Warn("This warn will print to stdout and the log file")
 log.Error("This error will print only to the log file")
-log.Critical("This critical will print only to the log file")
+log.Info("This info will print only to the log file")
 log.Debug("This debug will not print to the log or stdout")
 log.Trace("This trace will not print to the log or stdout")
 ```
